@@ -28,7 +28,7 @@ const Calculator = () => {
       <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="AC" />
       <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="%" />
       <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="+/-" />
-      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="/" />
+      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="+" />
       <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="7" />
       <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="8" />
       <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="9" />
