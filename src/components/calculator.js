@@ -1,34 +1,61 @@
 import React from 'react';
+import Keys from './operator';
+import calculate from '../logic/Calculate';
 
 class Calculator extends React.PureComponent {
-  render() {
-    return (
-      <div className="wrapper">
-        <div className="screen">0</div>
-        <div className="btn light-gray">AC</div>
-        <div className="btn light-gray">%</div>
-        <div className="btn light-gray">+/-</div>
-        <div className="btn orange">/</div>
-        <div className="btn">7</div>
-        <div className="btn">8</div>
-        <div className="btn">9</div>
-        <div className="btn orange">x</div>
-        <div className="btn">4</div>
-        <div className="btn">5</div>
-        <div className="btn">6</div>
-        <div className="btn orange">+</div>
-        <div className="btn">1</div>
-        <div className="btn">2</div>
-        <div className="btn">3</div>
-        <div className="btn orange">-</div>
-        <div className="btn op">0</div>
-        <div className="btn">.</div>
-        <div className="btn orange">=</div>
-
-      </div>
-
-    );
+  constructor(props) {
+    super(props);
+    this.state = { total: 0, next: null, operation: null };
   }
+
+componentDidMount = () => {
+  this.setState({
+    total: 0,
+    next: null,
+    operation: null,
+  });
+}
+
+render() {
+  const handleEvent = (e) => {
+    const oprObject = calculate(this.state, e.target.textContent);
+    this.setState(oprObject);
+  };
+
+  const { total, operation, next } = this.state;
+  const oprnd = operation === '%' ? 'mod' : operation;
+  let result = '';
+  if (total) {
+    result = `${total} ${oprnd || ''} ${next || ''}`;
+  } else if (next) {
+    result = `${next} ${oprnd || ''}`;
+  }
+  return (
+    <div className="wrapper">
+      <div className="screen">{result || 0}</div>
+      <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="AC" />
+      <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="%" />
+      <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="+/-" />
+      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="/" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="7" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="8" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="9" />
+      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="x" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="4" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="5" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="6" />
+      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="+" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="1" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="2" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="3" />
+      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="-" />
+      <Keys styles="btn op" handleEvent={(e) => handleEvent(e)} val="0" />
+      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="." />
+      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="=" />
+
+    </div>
+  );
+}
 }
 
 export default Calculator;
