@@ -1,19 +1,24 @@
-![](https://img.shields.io/badge/Microverse-blueviolet)
-
 # math magic1
 
-> This a personal project designed using figma template for good user interface design
+![](https://img.shields.io/badge/Microverse-blueviolet)
+
+> This a personal project made using react and webpack
 
 # WORKFLOW SCREENSHOT
-![screenshot]()
+
+![screen]
+
 
 ## Built With
 - HTML
 - CSS
-- Figma Tempalate
+- React
+- 
 ## Live Demo (if available)
 
+
 [Live Demo Link]()
+
 
 ## Getting Started
 
@@ -23,21 +28,47 @@ To get a local copy up and running follow these simple example steps.
 
 - Web Browser
 - Code Editor
-- Figma Template
 - Prior knowledge of CSS, HTML, GIT, GITHUB and Linters.
 
 ### Setup
 
+
 ```bash
-git clone 
+npm install
 ```
 
-### Usage
+```bash
+npm build
+```
 
-Open the index file of the project in the browser to see the project
+```bash
+npm start
+```
+
+### Run the following commands to run linter tests
+
+WebHint
+```bash
+npx hint .
+```
+
+StyleLint
+```bash
+npx stylelint "**/*.{css,scss}"
+```
+
+ESLint
+```bash
+npx eslint .
+```
+
+```bash
+
+git clone//https://github.com/SiansandaTamara/math magic1
+cd math magic1
+```
 
 ## Authors
-
 👤 **Tamara Siansanda**
 
 - GitHub: [@SiansandaTamara](https://github.com/SiansandaTamara)
@@ -61,4 +92,5 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](./MIT.md) licensed.
+
+This project is [MIT](https://github.com/SiansandaTamara/math magic1/main/LICENSE ) licensed.
