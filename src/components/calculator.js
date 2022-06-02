@@ -1,28 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Keys from './operator';
 import calculate from '../logic/Calculate';
 
-class Calculator extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { total: 0, next: null, operation: null };
-  }
-
-componentDidMount = () => {
-  this.setState({
+const Calculator = () => {
+  const [state, setState] = useState({
     total: 0,
     next: null,
     operation: null,
   });
-}
 
-render() {
   const handleEvent = (e) => {
-    const oprObject = calculate(this.state, e.target.textContent);
-    this.setState(oprObject);
+    const oprObject = calculate(state, e.target.textContent);
+    setState(oprObject);
   };
 
-  const { total, operation, next } = this.state;
+  const { total, operation, next } = state;
   const oprnd = operation === '%' ? 'mod' : operation;
   let result = '';
   if (total) {
@@ -55,7 +47,6 @@ render() {
 
     </div>
   );
-}
-}
+};
 
 export default Calculator;
