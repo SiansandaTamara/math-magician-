@@ -1,55 +1,27 @@
-import {
-  NavLink, Switch, Route, HashRouter as Router,
-} from 'react-router-dom';
+import React from 'react';
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Calcu from './components/Calculator';
+
 import Home from './components/Home';
-import CalculatorPage from './components/Calculator';
-import Quote from './components/Quote';
+import Quote from './components/Quotes';
 
-const routes = [
-  {
-    name: 'Home',
-    path: '/',
-    component: <Home />,
-  },
-  {
-    name: 'Calculator',
-    path: '/calculator',
-    component: <CalculatorPage />,
-  },
-  {
-    name: 'Quote',
-    path: '/quote',
-    component: <Quote />,
-  },
-];
+class App extends React.PureComponent {
+  render() {
+    return (
+      <>
 
-const Header = () => (
-  <header className="app-bar">
-    <h1 className="app-title">Math Magicians</h1>
-    <nav className="nav">
-      <ul className="nav-links">
-        {routes.map(({ name, path }) => (
-          <li key={path}>
-            <NavLink exact activeClassName="active" to={path}>{name}</NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </header>
-);
+        <div className="display">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="calculator" element={<Calcu />} />
+            <Route path="Quotes" element={<Quote />} />
+          </Routes>
 
-const App = () => (
-  <Router basename={process.env.PUBLIC_URL}>
-    <>
-      <Header />
-      <div className="container">
-        <Switch>
-          {routes.map(({ path, component }) => (
-            <Route exact key={path} path={path}>{component}</Route>))}
-        </Switch>
-      </div>
-    </>
-  </Router>
-);
+        </div>
+      </>
+    );
+  }
+}
 
 export default App;
