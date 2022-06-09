@@ -2,7 +2,7 @@ import {
   NavLink, Switch, Route, HashRouter as Router,
 } from 'react-router-dom';
 import Home from './components/Home';
-import CalculatorPage from './components/calculator';
+import CalculatorPage from './components/Calculator';
 import Quote from './components/Quote';
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
     component: <Home />,
   },
   {
-    name: 'calculator',
+    name: 'Calculator',
     path: '/calculator',
     component: <CalculatorPage />,
   },
