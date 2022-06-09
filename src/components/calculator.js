@@ -1,52 +1,120 @@
-import React, { useState } from 'react';
-import Keys from './operator';
-import calculate from '../logic/Calculate';
+import { useCallback, useState } from 'react';
+import calculate from '../logic/calculate';
+import './calculator.css';
 
-const Calculator = () => {
-  const [state, setState] = useState({
-    total: 0,
-    next: null,
-    operation: null,
-  });
+const buttons = [
+  {
+    text: 'AC',
+  },
+  {
+    text: '+/-',
+  },
+  {
+    text: '%',
+  },
+  {
+    text: '÷',
+    className: 'bg-orange',
+  },
+  {
+    text: '7',
+  },
+  {
+    text: '8',
+  },
+  {
+    text: '9',
+  },
+  {
+    text: 'x',
+    className: 'bg-orange',
+  },
+  {
+    text: '4',
+  },
+  {
+    text: '5',
+  },
+  {
+    text: '6',
+  },
+  {
+    text: '-',
+    className: 'bg-orange',
+  },
+  {
+    text: '1',
+  },
+  {
+    text: '2',
+  },
+  {
+    text: '3',
+  },
+  {
+    text: '+',
+    className: 'bg-orange',
+  },
+  {
+    text: '0',
+    className: 'span-2-col',
+  },
+  {
+    text: '.',
+  },
+  {
+    text: '=',
+    className: 'bg-orange',
+  },
+];
 
-  const handleEvent = (e) => {
-    const oprObject = calculate(state, e.target.textContent);
-    setState(oprObject);
-  };
+export const Calculator = () => {
+  const [state, setState] = useState({});
 
-  const { total, operation, next } = state;
-  const oprnd = operation === '%' ? 'mod' : operation;
-  let result = '';
-  if (total) {
-    result = `${total} ${oprnd || ''} ${next || ''}`;
-  } else if (next) {
-    result = `${next} ${oprnd || ''}`;
-  }
+  const onClickHandler = useCallback((event) => {
+    setState((prev) => {
+      try {
+        const output = calculate(prev, event.target.value);
+        return ({
+          ...prev,
+          ...output,
+        });
+      } catch (e) {
+        return prev;
+      }
+    });
+  }, []);
+
+  const { total, next, operation } = state;
+  const display = (total || '') + (operation || '') + (next || '');
+
   return (
-    <div className="wrapper">
-      <div className="screen">{result || 0}</div>
-      <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="AC" />
-      <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="%" />
-      <Keys styles="btn light-gray" handleEvent={(e) => handleEvent(e)} val="+/-" />
-      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="+" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="7" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="8" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="9" />
-      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="x" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="4" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="5" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="6" />
-      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="+" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="1" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="2" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="3" />
-      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="-" />
-      <Keys styles="btn op" handleEvent={(e) => handleEvent(e)} val="0" />
-      <Keys styles="btn" handleEvent={(e) => handleEvent(e)} val="." />
-      <Keys styles="btn orange" handleEvent={(e) => handleEvent(e)} val="=" />
-
+    <div className="calculator">
+      <div className="output">
+        <p>{display || '0'}</p>
+      </div>
+      <div className="grid">
+        {buttons.map(({ text, className }) => (
+          <input
+            value={text}
+            className={`button grid-item ${className || ''}`}
+            key={text}
+            type="button"
+            onClick={onClickHandler}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Calculator;
+const CalculatorPage = () => (
+  <section className="calculator-container">
+    <h2 className="section-title">Let&apos;s do some math</h2>
+    <div className="calculator-content">
+      <Calculator />
+    </div>
+  </section>
+);
+
+export default CalculatorPage;

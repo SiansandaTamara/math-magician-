@@ -1,4 +1,4 @@
-import operate from './Operate';
+import operate from './operate';
 
 function isNumber(item) {
   return !!item.match(/[0-9]+/);
@@ -28,13 +28,13 @@ export default function calculate(obj, buttonName) {
     }
     // If there is an operation, update next
     if (obj.operation) {
-      if (obj.next && obj.next !== '0') {
-        return { ...obj, next: obj.next + buttonName };
+      if (obj.next) {
+        return { next: obj.next + buttonName };
       }
-      return { ...obj, next: buttonName };
+      return { next: buttonName };
     }
     // If there is no operation, update next and clear the value
-    if (obj.next && obj.next !== '0') {
+    if (obj.next) {
       return {
         next: obj.next + buttonName,
         total: null,
@@ -49,20 +49,20 @@ export default function calculate(obj, buttonName) {
   if (buttonName === '.') {
     if (obj.next) {
       if (obj.next.includes('.')) {
-        return { ...obj };
+        return {};
       }
-      return { ...obj, next: `${obj.next}.` };
+      return { next: `${obj.next}.` };
     }
     if (obj.operation) {
-      return { ...obj, next: '0.' };
+      return { next: '0.' };
     }
     if (obj.total) {
       if (obj.total.includes('.')) {
         return {};
       }
-      return { ...obj, next: `${obj.total}.` };
+      return { total: `${obj.total}.` };
     }
-    return { ...obj, next: '0.' };
+    return { total: '0.' };
   }
 
   if (buttonName === '=') {
@@ -79,10 +79,10 @@ export default function calculate(obj, buttonName) {
 
   if (buttonName === '+/-') {
     if (obj.next) {
-      return { ...obj, next: (-1 * parseFloat(obj.next)).toString() };
+      return { next: (-1 * parseFloat(obj.next)).toString() };
     }
     if (obj.total) {
-      return { ...obj, total: (-1 * parseFloat(obj.total)).toString() };
+      return { total: (-1 * parseFloat(obj.total)).toString() };
     }
     return {};
   }
@@ -95,21 +95,8 @@ export default function calculate(obj, buttonName) {
   //   return {};
   // }
 
-  // User pressed an operation after pressing '='
-  if (!obj.next && obj.total && !obj.operation) {
-    return { ...obj, operation: buttonName };
-  }
-
   // User pressed an operation button and there is an existing operation
   if (obj.operation) {
-    if (obj.total && !obj.next) {
-      return { ...obj, operation: buttonName };
-    }
-
-    if (!obj.total) {
-      return { total: 0, operation: buttonName };
-    }
-
     return {
       total: operate(obj.total, obj.next, obj.operation),
       next: null,
