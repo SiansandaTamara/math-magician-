@@ -135,17 +135,16 @@ body {
 .quote-div {
   margin-top: 10%;
   width: 75%;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    gap: 40px;
-    padding: 10%;
-    background-image: url(imgs/quote.png);
-    background-repeat: no-repeat;
-    background-size: 160px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 40px;
+  padding: 10%;
+  background-image: url(imgs/quote.png);
+  background-repeat: no-repeat;
+  background-size: 160px;
 }
 
 .quote-para {
   font-size: 24px;
 }
-
