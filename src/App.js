@@ -10,7 +10,6 @@ class App extends React.PureComponent {
   render() {
     return (
       <>
-
         <div className="display">
           <Routes>
             <Route path="/" element={<Home />} />
