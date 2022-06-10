@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Calcu from '../components/Calculator';
+import Calcu from './Components/Calculator';
 
-import Home from './components/Home';
-import Quote from './components/Quotes';
+import Home from './Components/Home';
+import Quote from './Components/Quotes';
 
 class App extends React.PureComponent {
   render() {
