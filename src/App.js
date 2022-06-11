@@ -1,25 +1,29 @@
 import React from 'react';
-import './App.css';
+import './assets/main.css';
 import { Routes, Route } from 'react-router-dom';
-import Calcu from './Components/Calculator';
+import Calculator from './components/Calculator';
+import Home from './components/Home';
+import Quote from './components/Quote';
+import Navbar from './components/Navbar';
 
-import Home from './Components/Home';
-import Quote from './Components/Quotes';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-class App extends React.PureComponent {
   render() {
     return (
-      <>
-
-        <div className="display">
+      <div className="App">
+        <section className="app-container">
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="calculator" element={<Calcu />} />
-            <Route path="Quotes" element={<Quote />} />
+            <Route path="/calculator" element={<Calculator />} />
+            <Route path="/quote" element={<Quote />} />
           </Routes>
-
-        </div>
-      </>
+        </section>
+      </div>
     );
   }
 }
